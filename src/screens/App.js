@@ -1,43 +1,50 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+/*
+* https://github.com/facebook/react-native
+*
+* @format
+* @flow strict-local
+*/
 
-import React, {Component} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import React from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Text,
+  StatusBar,
+} from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-let iconApp = require('../../static/images/Icon_app.png');
-
-type Props = {};
-export default class App extends Component<Props> {
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to Tiny Yego!</Text>
-        <Image source={iconApp} style={styles.iconApp}/>
+const App = () => (
+  <>
+    <StatusBar barStyle="dark-content" />
+    <SafeAreaView>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>YEGO - Technical Test</Text>
+        </View>
       </View>
-    );
-  }
-}
+    </SafeAreaView>
+  </>
+);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  body: {
+    backgroundColor: Colors.white,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    height: '100%',
+    width: '100%',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 20,
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
   },
-  iconApp: {
-    height: 150,
-    width: 150
-  }
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: Colors.dark,
+  },
 });
+
+export default App;

@@ -1,20 +1,17 @@
-import lodash from 'lodash'
-import AsyncStorage from '@react-native-community/async-storage'
-
-const cachedStateKey = 'AfRFw3Etw4we4WeeTRfw123eaEF';
+import { omit } from 'lodash';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export function getCachedState() {
-  return AsyncStorage.getItem(cachedStateKey)
-  .then(response => JSON.parse(response) || {})
-}
+  return AsyncStorage.getItem("CACHE_KEY")
+    .then((response) => JSON.parse(response) || {});
+};
 
 export function createAsyncStorageMiddleware(blacklistedKeys = []) {
-  return store => next => action => {
+  return ((store) => (next) => (action) => {
     const result = next(action);
-    const newState = store.getState();
-    const cachedState = lodash.omit(newState, blacklistedKeys);
+    const newState = omit(store.getState(), blacklistedKeys);
 
-    AsyncStorage.setItem(cachedStateKey, JSON.stringify(cachedState));
+    AsyncStorage.setItem("CACHE_KEY", JSON.stringify(newState));
     return result;
-  }
+  });
 }
