@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 import { Marker } from 'react-native-maps';
 
-import ScooterPropType from "../models/ScooterPropType";
+import { ScooterPropType } from "../models/scooter";
 
 const ScooterMarker = ({
   data, onPress, image,

@@ -6,13 +6,12 @@
 */
 
 import React from 'react';
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import PropTypes from 'prop-types';
 
 import MapView from 'react-native-maps';
-import { SCOOTER_ICONS } from "../models";
+import { SCOOTER_ICONS, ScooterPropType } from "../models/scooter";
 import ScooterMarker from './ScooterMarker';
-import ScooterPropType from "../models/ScooterPropType";
 
 const MainMap = React.forwardRef(({
   items, selected, selectMarker, currentPosition,
@@ -20,7 +19,7 @@ const MainMap = React.forwardRef(({
   <MapView
     ref={ref}
     style={styles.map}
-    initialRegion={{
+    initialRegion={currentPosition && {
       latitude: currentPosition.lat,
       longitude: currentPosition.lng,
       latitudeDelta: 0.01,
@@ -39,18 +38,19 @@ const MainMap = React.forwardRef(({
 ));
 
 MainMap.propTypes = {
-
   items: PropTypes.arrayOf(ScooterPropType),
-  selected: ScooterPropType.isRequired,
+  selected: ScooterPropType,
   selectMarker: PropTypes.func.isRequired,
   currentPosition: PropTypes.shape({
     lat: PropTypes.number,
     lng: PropTypes.number,
-  }).isRequired,
+  }),
 };
 
 MainMap.defaultProps = {
   items: [],
+  currentPosition: undefined,
+  selected: undefined,
 };
 
 const styles = StyleSheet.create({

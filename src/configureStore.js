@@ -14,6 +14,9 @@ import {
 } from './middlewares/AsyncStorageMiddleware';
 
 const blacklistedKeys = [
+  "vehicles.nearBy",
+  "vehicles.selected",
+  "vehicles.currentPosition",
 ];
 
 export default async function () {
@@ -24,6 +27,7 @@ export default async function () {
     sagaMiddleware,
     thunk,
   )(createStore);
+
   const store = createStoreWithMiddleware(reducers, cachedState);
 
   sagaMiddleware.run(sagas);

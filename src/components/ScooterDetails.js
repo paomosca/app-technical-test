@@ -15,7 +15,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import ScooterPropType from "../models/ScooterPropType";
+import { ScooterPropType } from "../models/scooter";
 
 import { Colors } from "../theme";
 
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.gray,
   },
   container: {
+    alignSelf: "stretch",
     padding: 16,
     alignItems: "stretch",
     justifyContent: "center",
