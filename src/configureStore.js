@@ -16,7 +16,7 @@ import {
 const blacklistedKeys = [
   "vehicles.nearBy",
   "vehicles.selected",
-  "vehicles.currentPosition",
+  "location.ready",
 ];
 
 export default async function () {

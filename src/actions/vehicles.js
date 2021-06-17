@@ -1,24 +1,33 @@
-
-import Geolocation from 'react-native-geolocation-service';
 import {
   GET_SCOOTERS,
+  SCOOTERS_AROUND,
   SELECT_SCOOTER,
-  GET_LOCATION,
 } from "./types";
 
-import { hasLocationPermission } from "../libs/geo";
+import { sortingScooters, nearByScooters } from "../models/scooter";
 
 import create from "../services/YegoApi";
 
 const api = create();
 
-export const loadScooters = () => async (dispatch) => {
+export const loadScooters = () => async (dispatch, getState) => {
+  const state = getState();
+  const { location } = state;
+
   try {
     const response = await api.getScooters();
+    const scooters = response.data;
+
+    const sorted = sortingScooters(scooters, location.currentPosition);
+    const nearBy = nearByScooters(sorted);
 
     dispatch({
       type: GET_SCOOTERS,
-      payload: response.data,
+      payload: {
+        scooters: sorted,
+        nearBy,
+        selected: nearBy && nearBy[0],
+      },
     });
 
     return Promise.resolve(response.data);
@@ -34,32 +43,3 @@ export const selectScooter = (scooter) => (dispatch) => {
   });
 };
 
-export const getUserLocation = () => async (dispatch) => {
-  const hasPermission = await hasLocationPermission();
-
-  if (!hasPermission) {
-    return;
-  }
-  Geolocation.getCurrentPosition(
-    (position) => {
-      const { latitude, longitude } = position.coords;
-
-      dispatch({
-        type: GET_LOCATION,
-        payload: { lat: latitude, lng: longitude },
-      });
-    },
-    (error) => {
-      Alert.alert(`Code ${error.code}`, error.message);
-    },
-    {
-      accuracy: {
-        android: 'high',
-        ios: 'best',
-      },
-      timeout: 15000,
-      maximumAge: 10000,
-      distanceFilter: 0,
-    },
-  );
-};

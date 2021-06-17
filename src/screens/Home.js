@@ -12,39 +12,50 @@ import {
   View,
   StatusBar,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 
 import _ from "lodash";
 
 import { useSelector, useDispatch } from 'react-redux';
-import { Colors, Metrics } from "../theme";
-
 import { MAX_DISTANCE } from "../config/AppConfig";
+
 import { SCOOTER_STATUSES } from "../models/scooter";
+
+import { loadScooters, selectScooter, getUserLocation } from "../actions";
+
 import ScooterDetails from "../components/ScooterDetails";
 import MainMap from "../components/MainMap";
-import { loadScooters, selectScooter, getUserLocation } from "../actions/vehicles";
+import { Colors, Metrics } from "../theme";
 
-const App = () => {
-  const vehicles = useSelector((state) => state.vehicles);
+const Home = () => {
+  const store = useSelector((state) => state);
+  const { vehicles, location } = store;
   const dispatch = useDispatch();
 
   const {
-    scooters, selected, nearBy, currentPosition,
+    scooters, selected, nearBy,
   } = vehicles;
+  const { currentPosition, ready } = location;
 
   const [index, setIndex] = useState(0);
   const mapRef = useRef(undefined);
 
   useEffect(() => {
     dispatch(getUserLocation());
-    dispatch(loadScooters());
-  }, []);
+    if (ready) {
+      dispatch(loadScooters());
+    }
+  }, [ready]);
 
   const goPrevious = () => {
     if (index > 0) {
       selectMarker(nearBy[index - 1]);
     }
+  };
+
+  const refreshLocation = () => {
+    dispatch(getUserLocation());
   };
 
   const goNext = () => {
@@ -92,7 +103,12 @@ const App = () => {
             <View
               style={styles.panel}
             >
-              {selected === undefined && (<Text style={styles.alert}>No scooters availables around</Text>)}
+              {location.ready === false && (
+                <>
+                  <Text style={styles.alert}>...waiting for user location...</Text>
+                  <TouchableOpacity onPress={refreshLocation}><Text style={styles.alert}>Retry</Text></TouchableOpacity>
+                </>
+              )}
               {selected && (
 
               <ScooterDetails
@@ -137,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Home;

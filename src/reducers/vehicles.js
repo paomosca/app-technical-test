@@ -1,20 +1,16 @@
 
+import _ from "lodash";
 import {
   GET_SCOOTERS,
   SELECT_SCOOTER,
-  GET_LOCATION,
+  SCOOTERS_AROUND,
+  LOCATION_CHANGE,
 } from "../actions/types";
 
 import { sortingScooters, nearByScooters } from "../models/scooter";
 
-const fakePosition = {
-  lat: 41.394292,
-  lng: 2.163697,
-};
-
 const initialState = {
   scooters: [],
-  currentPosition: fakePosition,
   nearBy: [],
   selected: undefined,
 };
@@ -22,30 +18,37 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_SCOOTERS: {
-      const { currentPosition } = state;
-
-      const sorted = sortingScooters(action.payload, currentPosition);
-      const near = nearByScooters(sorted);
+      const { scooters, selected, nearBy } = action.payload;
 
       return {
         ...state,
-        scooters: sorted,
-        nearBy: near,
-        selected: near && near[0],
+        scooters,
+        selected,
+        nearBy,
       };
     }
 
-    case GET_LOCATION: {
+    case SCOOTERS_AROUND: {
+      const { selected, nearBy } = action.payload;
+
+      return {
+        ...state,
+        nearBy,
+        selected,
+      };
+    }
+
+    case LOCATION_CHANGE: {
       const { scooters } = state;
+
       const sorted = sortingScooters(scooters, action.payload);
-      const near = nearByScooters(sorted);
+      const nearBy = nearByScooters(sorted);
 
       return {
         ...state,
         scooters: sorted,
-        nearBy: near,
-        selected: near && near[0],
-        currentPosition: action.payload,
+        nearBy,
+        selected: nearBy && nearBy[0],
       };
     }
 
