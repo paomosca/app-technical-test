@@ -7,16 +7,16 @@ import AppContainer from './src/containers/AppContainer';
 
 class YegoTiny extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.state = {}
+    this.state = {};
   }
 
   componentDidMount() {
     this.configureStore = makeCancelable(configureStore());
-    this.configureStore.promise.then(store => {
-      this.setState({store});
-    }).catch(e => console.warn("configureStore canceled:", e && e.message ? e.message : e));
+    this.configureStore.promise.then((store) => {
+      this.setState({ store });
+    }).catch((e) => console.warn("configureStore canceled:", e && e.message ? e.message : e));
   }
 
   componentWillUnmount() {
@@ -27,12 +27,12 @@ class YegoTiny extends React.Component {
     if (this.state.store) {
       return (
         <Provider store={this.state.store}>
-          <AppContainer/>
+          <AppContainer />
         </Provider>
-      )
+      );
     }
-    return null
+    return null;
   }
 }
 
-export default YegoTiny
+export default YegoTiny;

@@ -1,0 +1,6 @@
+
+export const GET_SCOOTERS = 'GET_SCOOTERS';
+export const SELECT_SCOOTER = 'SELECT_SCOOTER';
+export const LOCATION_CHANGE = 'LOCATION_CHANGE';
+export const SCOOTERS_AROUND = 'SCOOTERS_AROUND';
+

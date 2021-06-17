@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import App from '../screens/App';
+import Home from '../screens/Home';
 
 const mapStateToProps = (state, props) => ({
 });
@@ -12,6 +11,6 @@ const mapDispatchToProps = (dispatch, props) => ({
 const AppContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(Home);
 
 export default AppContainer;
