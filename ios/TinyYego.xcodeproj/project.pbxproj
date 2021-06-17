@@ -395,6 +395,7 @@
 			baseConfigurationReference = A0409731A0F113972D71388E /* Pods-TinyYego-TinyYegoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 46UKD322UG;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -423,6 +424,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 46UKD322UG;
 				INFOPLIST_FILE = TinyYegoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -448,6 +450,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 46UKD322UG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TinyYego/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -459,7 +462,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tinyyego;
+				PRODUCT_BUNDLE_IDENTIFIER = io.idev.tinyyego;
 				PRODUCT_NAME = TinyYego;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -474,6 +477,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 46UKD322UG;
 				INFOPLIST_FILE = TinyYego/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -484,7 +488,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tinyyego;
+				PRODUCT_BUNDLE_IDENTIFIER = io.idev.tinyyego;
 				PRODUCT_NAME = TinyYego;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

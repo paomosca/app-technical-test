@@ -13,6 +13,7 @@ import {
   StatusBar,
   Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 
 import _ from "lodash";
@@ -84,6 +85,8 @@ const Home = () => {
         setIndex(selectedIndex);
       }
       dispatch(selectScooter(marker));
+    } else {
+      Alert.alert(`Vehicle too far, you can only get one in a radius of ${MAX_DISTANCE} m`);
     }
   };
 
@@ -103,7 +106,7 @@ const Home = () => {
             <View
               style={styles.panel}
             >
-              {location.ready === false && (
+              {!location.ready && (
                 <>
                   <Text style={styles.alert}>...waiting for user location...</Text>
                   <TouchableOpacity onPress={refreshLocation}><Text style={styles.alert}>Retry</Text></TouchableOpacity>

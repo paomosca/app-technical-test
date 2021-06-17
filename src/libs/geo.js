@@ -37,11 +37,7 @@ const hasPermissionIOS = async () => {
     return true;
   }
 
-  if (status === 'denied') {
-    Alert.alert('Location permission denied');
-  }
-
-  if (status === 'disabled') {
+  if (["denied", "disabled"].includes(status)) {
     Alert.alert(
       `Turn on Location Services to allow "${appConfig.displayName}" to determine your location.`,
       '',
